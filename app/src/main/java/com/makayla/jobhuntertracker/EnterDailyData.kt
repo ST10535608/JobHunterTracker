@@ -1,5 +1,6 @@
 package com.makayla.jobhuntertracker
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -69,6 +70,12 @@ class EnterDailyData : AppCompatActivity() {
         }
 
         btnViewSummary.setOnClickListener {
+            val intent = Intent(this, DetailedSummaryView::class.java)
+            intent.putExtra("total_application", calculateTotalApplication())
+            intent.putExtra("Average_Hours", calculateAverageHours())
+            intent.putExtra("productive", mostProductiveDay())
+            intent.putExtra("summary", completeSummary())
+            startActivity(intent)
 
         }
 
