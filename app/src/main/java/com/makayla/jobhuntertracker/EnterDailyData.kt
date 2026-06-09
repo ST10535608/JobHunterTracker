@@ -140,7 +140,7 @@ class EnterDailyData : AppCompatActivity() {
     fun mostProductiveDay(): String {
         var max = applications[0]
         var maxIndex = 0
-        var counter = 0
+        var counter = 1
         while (counter < applications.count()) {
             if (applications[counter] > max) {
                 max = applications[counter]

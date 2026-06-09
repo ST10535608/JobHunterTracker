@@ -33,7 +33,7 @@ class DetailedSummaryView : AppCompatActivity() {
 
         txtPersonalFeedback.text = when {
             total > 30 -> "Outstanding effort! You applied to over 30 positions this week. Keep it up!"
-            total 15 <= 30 -> "Good work! You are making consistent progress in your job search"
+            total in 15 .. 30 -> "Good work! You are making consistent progress in your job search"
                 else -> "Keep pushing! Try to increase your daily applications next week."
         }
 
