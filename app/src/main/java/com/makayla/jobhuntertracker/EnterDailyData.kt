@@ -8,31 +8,22 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class EnterDailyData : AppCompatActivity() {
 
-    var days = arrayOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+    val days = arrayOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 
     var applications = Array(7) { 0 }
-
     var hoursSearched = Array(7) { 0 }
-
     var interviews = Array(7) { 0 }
-
     var notes = Array(7) { "" }
 
     var index = 0
 
     lateinit var edtApplications: EditText
-
     lateinit var edtHoursSpent: EditText
-
     lateinit var edtInterviews: EditText
-
     lateinit var edtNotes: EditText
-
     lateinit var txtWeekday: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +51,7 @@ class EnterDailyData : AppCompatActivity() {
                     clearInputs()
                     Toast.makeText(this, "Saved! Now enter ${days[index]}", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, "All entries done! Tap View Details.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "All entries done! Tap View Summary.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -76,10 +67,7 @@ class EnterDailyData : AppCompatActivity() {
             intent.putExtra("productive", mostProductiveDay())
             intent.putExtra("summary", completeSummary())
             startActivity(intent)
-
         }
-
-
     }
 
     fun fillArrays(): Boolean {
@@ -99,7 +87,7 @@ class EnterDailyData : AppCompatActivity() {
         return true
     }
 
-    fun clearInputs () {
+    fun clearInputs() {
         edtApplications.text.clear()
         edtHoursSpent.text.clear()
         edtInterviews.text.clear()
@@ -148,14 +136,14 @@ class EnterDailyData : AppCompatActivity() {
             }
             counter++
         }
-        return "${days[maxIndex]} ($max)"
+        return "${days[maxIndex]} ($max applications)"
     }
 
     fun completeSummary(): String {
         var result = ""
         var counter = 0
         while (counter < days.count()) {
-            result += "${days[counter]}: ${applications[counter]} / ${hoursSearched[counter]}\n / ${interviews[counter]}\n / ${notes[counter]}\n"
+            result += "${days[counter]}: ${applications[counter]} apps, ${hoursSearched[counter]} hrs, ${interviews[counter]} interviews\nNotes: ${notes[counter]}\n\n"
             counter++
         }
         return result

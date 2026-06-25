@@ -5,8 +5,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class DetailedSummaryView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,29 +15,30 @@ class DetailedSummaryView : AppCompatActivity() {
         val txtResults = findViewById<TextView>(R.id.txtResults)
         val txtTotalApplication = findViewById<TextView>(R.id.txtTotalApplication)
         val txtMostProductive = findViewById<TextView>(R.id.txtMostProductive)
-        val txtAverageHours = findViewById<TextView>(R.id. txtAverageHours)
+        val txtAverageHours = findViewById<TextView>(R.id.txtAverageHours)
         val txtPersonalFeedback = findViewById<TextView>(R.id.txtPersonalFeedback)
         val btnBack = findViewById<Button>(R.id.btnBack)
 
         val total = intent.extras?.getInt("total_application") ?: 0
-        val highest = intent.extras?.getString("productive")?: ""
-        val average = intent.extras?.getDouble("Average_Hours")?: 0.0
-        val summary = intent.extras?.getString("summary")?: ""
+        val highest = intent.extras?.getString("productive") ?: ""
+        val average = intent.extras?.getDouble("Average_Hours") ?: 0.0
+        val summary = intent.extras?.getString("summary") ?: ""
+
+        val avgFormatted = String.format("%.1f", average)
 
         txtResults.text = summary
-        txtTotalApplication.text = "Total Applications sent $total"
-        txtMostProductive.text = "Most applications sent out $highest"
-        txtAverageHours.text = "Your average search per day was $average"
+        txtTotalApplication.text = "Total applications sent: $total"
+        txtMostProductive.text = "Most productive day: $highest"
+        txtAverageHours.text = "Average search time per day: $avgFormatted hrs"
 
         txtPersonalFeedback.text = when {
             total > 30 -> "Outstanding effort! You applied to over 30 positions this week. Keep it up!"
-            total in 15 .. 30 -> "Good work! You are making consistent progress in your job search"
-                else -> "Keep pushing! Try to increase your daily applications next week."
+            total in 15..30 -> "Good work! You are making consistent progress in your job search."
+            else -> "Keep pushing! Try to increase your daily applications next week."
         }
 
         btnBack.setOnClickListener {
             finish()
         }
-
     }
 }
